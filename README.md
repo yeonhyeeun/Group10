@@ -1,4 +1,5 @@
-![메인][https://www.shutterstock.com/ko/image-photo/stylish-fashion-teenager-model-wearing-hoodie-1678390384]
+![메인](https://www.shutterstock.com/ko/image-photo/stylish-fashion-teenager-model-wearing-hoodie-1678390384)   
+
 🎧Music Playlist
 =================
 group10의 미니 프로젝트 주제는 음악 플레이리스트 프로그램입니다.   
