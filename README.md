@@ -1,4 +1,4 @@
-![메인](/Users/mayeonn/Desktop/play.png)   
+![메인](./Desktop/play.png)   
 
 🎧Music Playlist
 =================
