@@ -1,4 +1,4 @@
-![메인](https://www.shutterstock.com/ko/image-photo/stylish-fashion-teenager-model-wearing-hoodie-1678390384)   
+![메인](/Users/mayeonn/Desktop/play.png)   
 
 🎧Music Playlist
 =================
