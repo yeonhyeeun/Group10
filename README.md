@@ -1,5 +1,3 @@
-Group10
-=======
 OSSL mini project  
 
 
