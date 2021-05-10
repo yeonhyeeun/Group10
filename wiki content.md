@@ -1,4 +1,4 @@
-![play]
+//실제 위키에 아래 사진 추가 필요 
 <img src ="https://user-images.githubusercontent.com/74174059/117560786-bb2bed80-b0cb-11eb-99de-1c61de0373fa.jpg" width= "40%">
 
 
