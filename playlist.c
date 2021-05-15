@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #define SIZE 40
 
 typedef struct {
@@ -30,6 +31,18 @@ int addSong(Song *s){   //성공시 1 리턴, main에서 count+=
     scanf("%d", &s->likes);
 
     return 1;
+}
+
+//2.
+void listSong(Song *s, int count){
+    int no=0;
+    printf("NAME      ARTIST    ALBUM     LIKES     \n");
+    printf("----------------------------------------\n");
+    for(int i=0; i<count; i++){
+        if(s[i].likes==-1) continue;
+        printf("%d ", ++no);
+        readSong(s[i]);
+    }
 }
 
 // 3.
@@ -64,6 +77,36 @@ int deleteSong(Song *s){ //삭제시 likes = -1, 1 리턴, main에서 count—;
     if(del==1) s->likes = -1;
     printf("삭제되었습니다\n");
     return 1;
+}
+
+//5.
+void savePlaylist(Song *s, int count){
+    FILE *fp=fopen("playlist.txt", "wt");
+    for(int i=0; i<count; i++){
+        if(s[i].likes==-1) continue;
+        fprintf(fp, "%s", s[i].name);
+        fprintf(fp, "%s", s[i].artist);
+        fprintf(fp, "%s", s[i].album);
+        fprintf(fp, "%d", s[i].likes);
+    }
+    fclose(fp);
+    printf("~~저장됨~~\n");
+}
+
+//6.
+int loadPlaylist(Song *s){ //main에서 count =
+    int i;
+    FILE *fp=fopen("playlist.txt", "rt");
+    for(i=0; i<100; i++){
+        fgets(s[i].name, sizeof(s->name), fp);
+        if(feof(fp)) break;
+        fscanf(fp, "%s", s[i].name);
+        fscanf(fp, "%s", s[i].artist);
+        fscanf(fp, "%s", s[i].album);
+        fscanf(fp, "%d", s[i].likes);
+    }
+    fclose(fp);
+    return i;
 }
 
 //7.
@@ -103,12 +146,10 @@ int main(void){
     Song slist[SIZE];
     int count=0, index=0;
     int menu;
-    /*
     count = loadfile(slist);
     index = count;
     if(count==0) printf("~~저장된 플레이리스트 없음~~\n");
     else listSong(slist, count);
-    */
     while(1){
     menu = selectMenu();
 
@@ -131,19 +172,17 @@ int main(void){
         }
     }
     else if(menu==4){
-        //listSong(slist, count);
+        listSong(slist, count);
         int no = selectDataNum(slist,index);
         if(no==0){
             printf("취소됨!\n");
             continue;
         }
         else{
-            deleteSong(&slist[no-1]);
+            deleteSong(&slist[no-1);
             printf("~~ 삭제됨 ~~\n");
             continue;
         }
-        }
     }
-    printf("~~~~~~ 종료됨 ~~~~~~\n");
     return 0;
 }
