@@ -69,7 +69,7 @@ int updateSong(Song *s){    //성공시 1 리턴
 }
 
 // 4.
-int deleteSong(Song *s){ //삭제시 likes = -1, 1 리턴, main에서 count—;
+int deleteSong(Song *s){ //삭제시 likes = -1, 1 리턴, main에서 count-=
     int del;
 
     printf("정말로 삭제하시겠습니까?(삭제: 1)   ");
@@ -90,14 +90,13 @@ void savePlaylist(Song *s, int count){
         fprintf(fp, "%d", s[i].likes);
     }
     fclose(fp);
-    printf("~~저장됨~~\n");
 }
 
 //6.
 int loadPlaylist(Song *s){ //main에서 count =
     int i;
     FILE *fp=fopen("playlist.txt", "rt");
-    for(i=0; i<100; i++){
+    for(i=0; i<SIZE; i++){
         fgets(s[i].name, sizeof(s->name), fp);
         if(feof(fp)) break;
         fscanf(fp, "%s", s[i].name);
@@ -146,31 +145,36 @@ int main(void){
     Song slist[SIZE];
     int count=0, index=0;
     int menu;
-    count = loadfile(slist);
+    count = loadPlaylist(slist);
     index = count;
+
     if(count==0) printf("~~저장된 플레이리스트 없음~~\n");
     else listSong(slist, count);
+
     while(1){
     menu = selectMenu();
 
     if(menu==0) break;
 
+    else if(menu==1){
+        if(count>0) listSong(slist, index);
+    }
+
     else if(menu==2){
-        addSong(&slist[count++]);
+        count+=addSong(&slist[count++]);
         printf("~~ 추가됨 ~~\n");
     }
+
     else if(menu==3){
         int no = selectDataNum(slist,count);
         if(no==0){
             printf("취소됨!\n");
             continue;
         }
-        else{
-            updateSong(&slist[no-1]);
-            printf("~~ 수정됨 ~~\n");
-            continue;
-        }
+        updateSong(&slist[no-1]);
+        printf("~~ 수정됨 ~~\n");
     }
+
     else if(menu==4){
         listSong(slist, count);
         int no = selectDataNum(slist,index);
@@ -178,11 +182,16 @@ int main(void){
             printf("취소됨!\n");
             continue;
         }
-        else{
-            deleteSong(&slist[no-1);
-            printf("~~ 삭제됨 ~~\n");
-            continue;
-        }
+        count-=deleteSong(&slist[no-1]);
+        printf("~~ 삭제됨 ~~\n");
+    }
+
+    else if(menu==5){
+        savePlaylist(slist, index);
+        printf("~~ 저장됨 ~~\n");
+    }
+
+
     }
     return 0;
 }
