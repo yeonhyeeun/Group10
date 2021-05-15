@@ -1,6 +1,7 @@
-
 <img src ="https://user-images.githubusercontent.com/74174059/117560786-bb2bed80-b0cb-11eb-99de-1c61de0373fa.jpg" width= "40%">
 
+
+<img src = "https://user-images.githubusercontent.com/74174059/118371018-66193b80-b5e5-11eb-8f84-f3d1c57e5e28.jpg" width= "80%">
 
 ### 🎶나만의 플레이리스트를 만들어보세요!🎶 
 
