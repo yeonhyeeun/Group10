@@ -121,7 +121,7 @@ int loadPlaylist(Song *s){ //main에서 count =
         fscanf(fp, "%s", s[i].name);
         fscanf(fp, "%s", s[i].artist);
         fscanf(fp, "%s", s[i].album);
-        fscanf(fp, "%d", s[i].likes);
+        fscanf(fp, "%d", &s[i].likes);
     }
     fclose(fp);
     return i;
@@ -222,7 +222,7 @@ void searchAlbum(Song *s, int count) {
         if(s[i].likes == -1) continue;
         if(strstr(s[i].album, search)){
             printf("%2d", i+1); 
-            readSong(s);  //read역할을 하는 함수 
+            readSong(s[i]);  //read역할을 하는 함수 
             scnt++; 
         }
     }
