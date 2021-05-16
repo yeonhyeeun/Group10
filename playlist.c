@@ -10,6 +10,24 @@ typedef struct {
     int likes;
 } Song;
 
+int addSong(Song *s); //성공시 1 리턴, main에서 count+=
+void listSong(Song *s, int count);
+int updateSong(Song *s); //성공시 1 리턴
+int deleteSong(Song *s); //삭제시 likes = -1, 1 리턴, main에서 count—;
+void savePlaylist(Song *s, int count);
+int loadPlaylist(Song *s); //main에서 count =
+int selectMenu(); //선택한 메뉴 번호 리턴
+int selectDataNum(Song *s, int count);
+void searchSongName(Song *s, int count);
+void searchArtist(Song *s, int count);
+void searchAlbum(Song *s, int count);
+void listBySongName(Song *s, int count);
+void listByLikes(Song *s, int count);
+
+void readSong(Song s){ //song 하나 출력
+    printf("%.40s %.40s %.40s %d", s.name, s.artist, s.album, s.likes);
+}
+
 // 1.
 int addSong(Song *s){   //성공시 1 리턴, main에서 count+=
     printf("노래 제목을 입력하세요   ");
@@ -96,6 +114,7 @@ void savePlaylist(Song *s, int count){
 int loadPlaylist(Song *s){ //main에서 count =
     int i;
     FILE *fp=fopen("playlist.txt", "rt");
+
     for(i=0; i<SIZE; i++){
         fgets(s[i].name, sizeof(s->name), fp);
         if(feof(fp)) break;
@@ -131,17 +150,18 @@ int selectMenu(){ //선택한 메뉴 번호 리턴
     return menu;
 }
 
-
-// 8.
+//8번 
 int selectDataNum(Song *s, int count) {
     int no; 
-    //listSong(s, count);
+    listSong(s, count);
     printf("번호는? (취소:0) ");
     scanf("%d", &no);
     return no; 
-}
+} 
 
-// 9. 
+
+
+//9번 
 void searchSongName(Song *s, int count) {
     int scnt = 0; 
     char search[50];
@@ -154,7 +174,7 @@ void searchSongName(Song *s, int count) {
     for(int i=0; i < count; i++) {
         if(s[i].likes == -1) continue;
         if(strstr(s[i].name, search)){
-            prinft("%2d", i+1); 
+            printf("%2d", i+1); 
             readSong(s[i]);  //read역할을 하는 함수 
             scnt++; 
         }
@@ -163,7 +183,8 @@ if (scnt == 0) printf("=> 검색된 데이터 없음!");
 printf("\n"); 
 }
 
-// 10.
+
+//10번 
 void searchArtist(Song *s, int count) {
     int scnt = 0; 
     char search[50];
@@ -176,16 +197,18 @@ void searchArtist(Song *s, int count) {
     for(int i=0; i < count; i++) {
         if(s[i].likes == -1) continue;
         if(strstr(s[i].artist, search)){
-            prinft("%2d", i+1); 
+            printf("%2d", i+1); 
             readSong(s[i]);  //read역할을 하는 함수 
             scnt++; 
         }
     }
 if (scnt == 0) printf("=> 검색된 데이터 없음!");
+
 printf("\n"); 
 }
 
-// 11. 
+
+//11번 
 void searchAlbum(Song *s, int count) {
     int scnt = 0; 
     char search[50];
@@ -193,13 +216,13 @@ void searchAlbum(Song *s, int count) {
     printf("검색할 앨범의 이름은? : ");
     scanf("%s", search);
 
-    printf("==================>>_Play List_<<=================== \n");
+    printf("\n\n~~~~~~ Play List ~~~~~~\n");
     
     for(int i=0; i < count; i++) {
         if(s[i].likes == -1) continue;
         if(strstr(s[i].album, search)){
-            prinft("%2d", i+1); 
-            readSong(s[i]);  //read역할을 하는 함수 
+            printf("%2d", i+1); 
+            readSong(s);  //read역할을 하는 함수 
             scnt++; 
         }
     }
@@ -207,9 +230,41 @@ if (scnt == 0) printf("=> 검색된 데이터 없음!");
 printf("\n"); 
 }
 
-// 12. 
+
+//12번 
+void listBySongName(Song *s, int count){ //곡제목순 정렬 
+int i;
+for(i=0; i < SIZE; i++) {
+
+    char name[SIZE][SIZE];
+    name[i][SIZE] = s->name; 
+
+    qsort(s->name, SIZE, sizeof(s->name[0]), listBySongName);
+
+    for(i=0; i < SIZE; i++) {
+        printf("%no.2d %s\n", i+1, name[i]); 
+    }
+    printf("\n");
+}
+} 
 
 
+
+//13번 
+void listByLikes(Song *s, int count){ //좋아요순 정렬 
+int i;
+for(i=0; i < count; i++) {
+    int likes[SIZE];
+    likes[i] = s->likes; 
+
+qsort(s->likes, count, sizeof(s->likes),listByLikes);
+for(i=0; i < count; i++){
+        printf("[%2d] : %40d", i+1, likes[i], s->name); 
+    printf("\n"); 
+}
+    printf("\n"); 
+}
+}
 
 int main(void){
     Song slist[SIZE];
@@ -261,7 +316,25 @@ int main(void){
         printf("~~ 저장됨 ~~\n");
     }
 
+    else if(menu==6) { //제목 검색 
+        searchSongName(slist, index);
+    }
 
+    else if(menu==7) { //가수 검색 
+        searchArtist(slist, index);
+    }
+
+    else if(menu==8) { //앨범 검색 
+        searchAlbum(slist, index);
+    }
+        
+    else if(menu==9) { //곡제목순 정렬  
+        listBySongName(slist, index); 
+    }
+
+    else if(menu==10) { //좋아요순 정렬  
+        listByLikes(slist, index); 
+    }
     }
     return 0;
 }
