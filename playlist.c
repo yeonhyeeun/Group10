@@ -98,7 +98,7 @@ void savePlaylist(Song *s, int count){
     FILE *fp=fopen("playlist.txt", "wt");
     for(int i=0; i<count; i++){
         if(s[i].likes==-1) continue;
-        fprintf(fp, " %s\n%s\n%s\n%d", s[i].name, s[i].artist, s[i].album, s[i].likes);
+        fprintf(fp, " %s\n%s\n%s\n%d\n", s[i].name, s[i].artist, s[i].album, s[i].likes);
     }
     fclose(fp);
 }
@@ -225,7 +225,7 @@ if (scnt == 0) printf("=> 검색된 데이터 없음!");
 printf("\n"); 
 }
 
-
+/*
 //12번 
 void listBySongName(Song *s, int count){ //곡제목순 정렬 
 int i;
@@ -260,7 +260,7 @@ for(i=0; i < count; i++){
     printf("\n"); 
 }
 }
-
+*/
 
 int main(void){
     Song slist[100];
@@ -312,7 +312,7 @@ int main(void){
         savePlaylist(slist, count);
         printf("~~ 저장됨 ~~\n");
     }
-
+/*
     else if(menu==6) { //제목 검색 
         searchSongName(slist, index);
     }
@@ -332,6 +332,7 @@ int main(void){
     else if(menu==10) { //좋아요순 정렬  
         listByLikes(slist, index); 
     }
+    */
     }
     return 0;
 }
