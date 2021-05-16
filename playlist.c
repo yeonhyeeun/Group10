@@ -25,7 +25,7 @@ void listBySongName(Song *s, int count);
 void listByLikes(Song *s, int count);
 
 void readSong(Song s){ //song 하나 출력
-    printf("%s \t%s \t%s \t%d\n", s.name, s.artist, s.album, s.likes);
+    printf("%s\t\t%s\t%s\t%d\n", s.name, s.artist, s.album, s.likes);
 }
 
 // 1.
@@ -52,8 +52,8 @@ int addSong(Song *s){   //성공시 1 리턴, main에서 count+=
 //2.
 void listSong(Song *s, int count){
     int no=0;
-    printf("   NAME\t\tARTIST\t\tALBUM\t\t\tLIKES\n");
-    printf("-----------------------------------------------------------------\n");
+    printf("   NAME\t\t\tARTIST\t\tALBUM\t\t\tLIKES\n");
+    printf("----------------------------------------------------------------------\n");
     for(int i=0; i<count; i++){
         if(s[i].likes==-1) continue;
         printf("%d) ", ++no);
@@ -89,7 +89,6 @@ int deleteSong(Song *s){ //삭제시 likes = -1, 1 리턴, main에서 count-=
     printf("정말로 삭제하시겠습니까?(삭제: 1)   ");
     scanf("%d", &del);
     if(del==1) s->likes = -1;
-    printf("삭제되었습니다\n");
     return 1;
 }
 
@@ -98,7 +97,7 @@ void savePlaylist(Song *s, int count){
     FILE *fp=fopen("playlist.txt", "wt");
     for(int i=0; i<count; i++){
         if(s[i].likes==-1) continue;
-        fprintf(fp, " %s\n%s\n%s\n%d\n", s[i].name, s[i].artist, s[i].album, s[i].likes);
+        fprintf(fp, " %s\n%s\n%s\n%d", s[i].name, s[i].artist, s[i].album, s[i].likes);
     }
     fclose(fp);
 }
