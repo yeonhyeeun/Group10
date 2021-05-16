@@ -141,6 +141,76 @@ int selectDataNum(Song *s, int count) {
     return no; 
 }
 
+// 9. 
+void searchSongName(Song *s, int count) {
+    int scnt = 0; 
+    char search[50];
+
+    printf("검색할 노래의 이름은? : ");
+    scanf("%s", search);
+
+    printf("\n\n~~~~~~ Play List ~~~~~~\n");
+    
+    for(int i=0; i < count; i++) {
+        if(s[i].likes == -1) continue;
+        if(strstr(s[i].name, search)){
+            prinft("%2d", i+1); 
+            readSong(s[i]);  //read역할을 하는 함수 
+            scnt++; 
+        }
+    }
+if (scnt == 0) printf("=> 검색된 데이터 없음!");
+printf("\n"); 
+}
+
+// 10.
+void searchArtist(Song *s, int count) {
+    int scnt = 0; 
+    char search[50];
+
+    printf("검색할 아티스트의 이름은? : ");
+    scanf("%s", search);
+
+    printf("\n\n~~~~~~ Play List ~~~~~~\n");
+    
+    for(int i=0; i < count; i++) {
+        if(s[i].likes == -1) continue;
+        if(strstr(s[i].artist, search)){
+            prinft("%2d", i+1); 
+            readSong(s[i]);  //read역할을 하는 함수 
+            scnt++; 
+        }
+    }
+if (scnt == 0) printf("=> 검색된 데이터 없음!");
+printf("\n"); 
+}
+
+// 11. 
+void searchAlbum(Song *s, int count) {
+    int scnt = 0; 
+    char search[50];
+
+    printf("검색할 앨범의 이름은? : ");
+    scanf("%s", search);
+
+    printf("==================>>_Play List_<<=================== \n");
+    
+    for(int i=0; i < count; i++) {
+        if(s[i].likes == -1) continue;
+        if(strstr(s[i].album, search)){
+            prinft("%2d", i+1); 
+            readSong(s[i]);  //read역할을 하는 함수 
+            scnt++; 
+        }
+    }
+if (scnt == 0) printf("=> 검색된 데이터 없음!");
+printf("\n"); 
+}
+
+// 12. 
+
+
+
 int main(void){
     Song slist[SIZE];
     int count=0, index=0;
