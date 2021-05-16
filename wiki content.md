@@ -33,7 +33,7 @@
 >> 2021.05.16 06:14 am. update by hyeeun : readSong함수 추가, 모든 함수 합쳤을때 문법 에러는 나지 않지만 컴파일 과정에서 signal: segmentation fault (core dumped)라는 에러 발생 
 
 > 마지막 피드백 (05.16 12:00 pm)
->> 수정 및 보완해야할 부분 : 
+>> 수정 및 보완해야할 부분 : readSong함수 수정으로 segmentation fault error 해결! 혜은 - 12,13번 함수 컴파일 에러 고쳐오기 
 
 * 프로젝트 참여자
 21900207 김하연  21900442 연혜은
