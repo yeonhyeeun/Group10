@@ -109,9 +109,9 @@ int loadPlaylist(Song *s){ //main에서 count =
     FILE *fp=fopen("playlist.txt", "rt");
 
     for(i=0; i<SIZE; i++){
-        if(feof(fp)) break;
         fgets(s[i].name, sizeof(s[i].name),fp);
         s[i].name[strlen(s[i].name)-1] = '\0';
+        if(feof(fp)) break;
         fgets(s[i].artist, sizeof(s[i].artist),fp);
         s[i].artist[strlen(s[i].artist)-1] = '\0';
         fgets(s[i].album, sizeof(s[i].album),fp);
@@ -225,7 +225,7 @@ if (scnt == 0) printf("=> 검색된 데이터 없음!");
 printf("\n"); 
 }
 
-/*
+
 //12번 
 void listBySongName(Song *s, int count){ //곡제목순 정렬 
 int i;
@@ -260,7 +260,7 @@ for(i=0; i < count; i++){
     printf("\n"); 
 }
 }
-*/
+
 
 int main(void){
     Song slist[100];
@@ -312,7 +312,7 @@ int main(void){
         savePlaylist(slist, count);
         printf("~~ 저장됨 ~~\n");
     }
-/*
+
     else if(menu==6) { //제목 검색 
         searchSongName(slist, index);
     }
@@ -332,7 +332,6 @@ int main(void){
     else if(menu==10) { //좋아요순 정렬  
         listByLikes(slist, index); 
     }
-    */
     }
     return 0;
 }
