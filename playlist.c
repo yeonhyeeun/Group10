@@ -224,26 +224,40 @@ if (scnt == 0) printf("=> 검색된 데이터 없음!");
 printf("\n"); 
 }
 
-/*
+//정렬에 필요한 함수
+int compare(const void *a, const void *b){
+    return strcmp((char*)a, (char*)b);
+}
+
 //12번 
 void listBySongName(Song *s, int count){ //곡제목순 정렬 
-int i;
-for(i=0; i < SIZE; i++) {
+    char nlist[count][SIZE];
+    //s의 이름을 nlist로 복사
+    for(int i=0; i<count; i++){
+        for(int j=0; j<SIZE; j++){
+            nlist[i][j] = s[i].name[j];
+        }
+    } 
+    //nlist를 이름 순으로 정렬  
+    qsort(nlist, count, SIZE, compare);
 
-    char name[SIZE][SIZE];
-    name[i][SIZE] = s->name; 
-
-    qsort(s->name, SIZE, sizeof(s->name[0]), listBySongName);
-
-    for(i=0; i < SIZE; i++) {
-        printf("%no.2d %s\n", i+1, name[i]); 
+    Song temp[count];
+    //nlist 이름 순서대로 temp 정렬
+    for(int i=0; i<count; i++){
+        for(int j=0; j<count; j++){
+            if(strstr(s[j].name, nlist[i])){
+            temp[i]=s[j];
+            }
+        }
     }
-    printf("\n");
-}
+    //temp를 s에 복사
+    for(int i=0; i<count; i++){
+        s[i]=temp[i];
+    }
 } 
 
 
-
+/*
 //13번 
 void listByLikes(Song *s, int count){ //좋아요순 정렬 
 int i;
@@ -311,7 +325,7 @@ int main(void){
         savePlaylist(slist, count);
         printf("~~ 저장됨 ~~\n");
     }
-/*
+
     else if(menu==6) { //제목 검색 
         searchSongName(slist, index);
     }
@@ -326,8 +340,9 @@ int main(void){
         
     else if(menu==9) { //곡제목순 정렬  
         listBySongName(slist, index); 
+        listSong(slist, count);
     }
-
+    /*
     else if(menu==10) { //좋아요순 정렬  
         listByLikes(slist, index); 
     }
