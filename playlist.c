@@ -260,19 +260,30 @@ void listBySongName(Song *s, int count){ //곡제목순 정렬
 /*
 //13번 
 void listByLikes(Song *s, int count){ //좋아요순 정렬 
-int i;
-for(i=0; i < count; i++) {
-    int likes[SIZE];
-    likes[i] = s->likes; 
+    int llist[count][SIZE];
+    //s의 좋아요 개수를 llist로 복사
+    for(int i=0; i<count; i++){
+        for(int j=0; j<SIZE; j++){
+            llist[i][j] = s[i].likes;
+        }
+    } 
+    //nlist를 좋아요 순으로 정렬  
+    qsort(llist, count, SIZE, compare);
 
-qsort(s->likes, count, sizeof(s->likes),listByLikes);
-for(i=0; i < count; i++){
-        printf("[%2d] : %40d", i+1, likes[i], s->name); 
-    printf("\n"); 
-}
-    printf("\n"); 
-}
-}
+    Song temp[count];
+    //llist 좋아요 수 순서대로 temp 정렬
+    for(int i=0; i<count; i++){
+        for(int j=0; j<count; j++){
+            if(strstr(s[j].likes, llist[i])){
+            temp[i]=s[j];
+            }
+        }
+    }
+    //temp를 s에 복사
+    for(int i=0; i<count; i++){
+        s[i]=temp[i];
+    }
+} 
 */
 
 int main(void){
