@@ -256,25 +256,33 @@ void listBySongName(Song *s, int count){ //곡제목순 정렬
     }
 } 
 
-
-/*
+void ascending (int arr[], int count){
+    int i,j,temp;
+    for(i=0; i<count; i++){
+        for(j=0; j<count-1-i; j++){
+            if(arr[j] < arr[j+1]){
+                temp=arr[j];
+                arr[j]=arr[j+1];
+                arr[j+1]=temp;
+            }
+        }
+    }
+}
 //13번 
 void listByLikes(Song *s, int count){ //좋아요순 정렬 
-    int llist[count][SIZE];
+    int llist[count];
     //s의 좋아요 개수를 llist로 복사
     for(int i=0; i<count; i++){
-        for(int j=0; j<SIZE; j++){
-            llist[i][j] = s[i].likes;
-        }
+        llist[i]=s[i].likes;
     } 
     //nlist를 좋아요 순으로 정렬  
-    qsort(llist, count, SIZE, compare);
+    ascending(llist,count);
 
     Song temp[count];
     //llist 좋아요 수 순서대로 temp 정렬
     for(int i=0; i<count; i++){
         for(int j=0; j<count; j++){
-            if(strstr(s[j].likes, llist[i])){
+            if(s[j].likes==llist[i]){
             temp[i]=s[j];
             }
         }
@@ -284,8 +292,6 @@ void listByLikes(Song *s, int count){ //좋아요순 정렬
         s[i]=temp[i];
     }
 } 
-*/
-
 int main(void){
     Song slist[100];
     int count=0, index=0;
@@ -353,11 +359,12 @@ int main(void){
         listBySongName(slist, index); 
         listSong(slist, count);
     }
-    /*
+    
     else if(menu==10) { //좋아요순 정렬  
         listByLikes(slist, index); 
+        listSong(slist,count);
     }
-    */
+    
     }
     return 0;
 }
